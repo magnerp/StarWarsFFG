@@ -12,13 +12,13 @@
     width: 230px;
 }
 
-.worldbuilding.sheet .window-content {
+.swffg.sheet .window-content {
     padding: 5px;
     overflow-y: hidden;
 }
 
 /* Sheet Header */
-.worldbuilding.sheet .sheet-header {
+.swffg.sheet .sheet-header {
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -28,74 +28,79 @@
     margin-bottom: 10px;
 }
 
-.worldbuilding.sheet.actor{
+.swffg.sheet.actor{
     min-width: 650px;
     max-width: 1090px;
 }
 
-.worldbuilding.sheet .profile-img {
+.swffg.sheet .profile-img {
     flex: 0 0 100px;
     height: 150px;
     margin-right: 10px;
 }
 
-.worldbuilding.sheet .header-fields {
+.swffg.sheet .header-fields {
     flex: 2;
     height: auto;
 }
 
-.worldbuilding.sheet .charname {
+.swffg.sheet .charname {
     height: 60px;
     padding: 5px;
     margin: 0;
     border-bottom: 0;
 }
-.worldbuilding.sheet .charname input {
+.swffg.sheet .charname input {
     width: 100%;
     height: 100%;
     margin: 0;
 }
 
-.worldbuilding.sheet .resource {
+.swffg.sheet .resource {
     flex-grow: 1;
     flex-shrink: 3;
     margin-top: 5px;
     margin-right: 1px;
 }
-.worldbuilding.sheet .resource input {
+.swffg.sheet .resource input {
     height: 28px;
 }
 
 /* Navigation Tabs */
-.worldbuilding.sheet .tabs {
+.swffg.sheet .tabs {
     flex: 0 0 40px;
     border-top: 1px solid #AAA;
     border-bottom: 1px solid #AAA;
 }
 
-.worldbuilding.sheet .tabs .item {
+.swffg.sheet .tabs .item {
     line-height: 40px;
     font-weight: bold;
 }
 
-.worldbuilding.sheet .tabs .item.active {
+.swffg.sheet .tabs .item.active {
     text-decoration: underline;
     text-shadow: none;
 }
 
 /* Content Tabs */
-.worldbuilding.sheet .sheet-body {
+.swffg.sheet .sheet-body {
     height: calc(100% - 19.2em);
     overflow: auto;
 }
 
-.worldbuilding.sheet .sheet-body .tab {
+.swffg.sheet .sheet-body .tab {
     height: 100%;
 }
-.worldbuilding.sheet .sheet-body .editor {
+.swffg.sheet .sheet-body .editor {
     width: 100%;
     height: 100%;
 }
+
+.swffg.sheet .editor .tox-toolbar-overlord,
+.swffg.sheet .editor .tox-toolbar__primary {
+    background: none;
+  }
 
 
 /*
@@ -113,25 +118,25 @@ sheet work. There is likely a better way to do this.
     padding: 0;
     overflow-y: auto;
 }
-.worldbuilding.sheet .items-list .item {
+.swffg.sheet .items-list .item {
     height: 30px;
     line-height: 24px;
     padding: 3px 0;
     border-bottom: 1px solid #BBB;
 }
-.worldbuilding.sheet .items-list .item img {
+.swffg.sheet .items-list .item img {
     flex: 0 0 24px;
     margin-right: 5px;
 }
-.worldbuilding.sheet .items-list .item-name {
+.swffg.sheet .items-list .item-name {
     margin: 0;
 }
-.worldbuilding.sheet .items-list .item-controls {
+.swffg.sheet .items-list .item-controls {
     flex: 0 0 36px;
 }
 
 /* Attributes */
-.worldbuilding.sheet .attributes-header {
+.swffg.sheet .attributes-header {
     padding: 5px;
     margin: 5px 0;
     background: rgba(0, 0, 0, 0.05);
@@ -140,14 +145,14 @@ sheet work. There is likely a better way to do this.
     text-align: center;
     font-weight: bold;
 }
-.worldbuilding.sheet .attribute-label {
+.swffg.sheet .attribute-label {
     flex: 1.5;
 }
-.worldbuilding.sheet .attribute-control {
+.swffg.sheet .attribute-control {
     flex: 0 0 20px;
 }
 
-.worldbuilding.sheet .attributes-list {
+.swffg.sheet .attributes-list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -157,8 +162,11 @@ sheet work. There is likely a better way to do this.
     background: rgba(166, 166, 155, 0.62);
 }
 
+.crit:nth-child(even){
+    background: rgba(166, 166, 155, 0.62);
+}
 
-.worldbuilding.sheet .attributes-list li > * {
+.swffg.sheet .attributes-list li > * {
     margin: 0 3px;
     height: 28px;
     line-height: 24px;
@@ -168,19 +176,19 @@ sheet work. There is likely a better way to do this.
     border-bottom: 1px solid #AAA;
 }
 
-.worldbuilding.sheet .attribute-value.checkbox {
+.swffg.sheet .attribute-value.checkbox {
     text-align: center;
 }
 
-.worldbuilding.sheet .attributes-list li a.attribute-control {
+.swffg.sheet .attributes-list li a.attribute-control {
     border: none;
 }
 
-.worldbuilding.sheet .characteristics-list {
+.swffg.sheet .characteristics-list {
     list-style: none;
 }
 
-.worldbuilding.sheet .characteristics-list input {
+.swffg.sheet .characteristics-list input {
     border-radius: 100%;
     width: 2em;
     height: 2em;
@@ -189,11 +197,11 @@ sheet work. There is likely a better way to do this.
     font-size: 18pt;
 }
 
-.worldbuilding.sheet .characteristics-list input:invalid {
+.swffg.sheet .characteristics-list input:invalid {
     border: 2px solid red;
 }
 
-.worldbuilding.sheet .characteristics-list label {
+.swffg.sheet .characteristics-list label {
     display: block;
     width: 3em;
     text-align: center;
@@ -270,6 +278,12 @@ boxes at the top of the standard FFG character sheets.
 }
 
 .dice-pool img {
+    border: 0;
+    width: 2em;
+    height: 2em;
+}
+
+.critDifficulty img {
     border: 0;
     width: 2em;
     height: 2em;

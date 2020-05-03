@@ -8,7 +8,7 @@ export class ActorSheetFFG extends ActorSheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-  	  classes: ["worldbuilding", "sheet", "actor"],
+  	  classes: ["swffg", "sheet", "actor"],
   	  template: "systems/starwarsffg/templates/ffg-actor-sheet.html",
       width: 880,
       height: 600,
@@ -25,6 +25,8 @@ export class ActorSheetFFG extends ActorSheet {
     for ( let attr of Object.values(data.data.attributes) ) {
       attr.isCheckbox = attr.dtype === "Boolean";
     }
+
+
     return data;
   }
 
@@ -72,6 +74,16 @@ export class ActorSheetFFG extends ActorSheet {
 	activateListeners(html) {
     super.activateListeners(html);
 
+    //Adding Description to Crits - needed because Tiny MCE sucks Linked sheets don't work for some reason :shrug:
+    let test = "wat";
+    let crits = $('.crit')
+    for (let index = 0; index < crits.length; index++){
+      let itemId = crits[index].dataset.itemId
+      let item = this.actor.getOwnedItem(itemId)
+      let div = $(`<div>${item.data.data.description}</div>`)
+      crits[index].children[3].children[0].append(div[0])
+    }
+
     // Activate tabs
     let tabs = html.find('.tabs');
     let initial = this._sheetTab;
@@ -97,9 +109,15 @@ export class ActorSheetFFG extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });
 
+
     // Setup dice pool image
     html.find(".skill").each((_, elem) => {
       this._addSkillDicePool(elem)
+    });
+
+    //Setup difficulty pool for crits
+    html.find(".critDifficulty").each((_,elem) =>{
+      this._addDifficultyPool(elem)
     });
 
     // Roll Skill
@@ -113,8 +131,8 @@ export class ActorSheetFFG extends ActorSheet {
       await this._rollSkill(event, upgradeType);
     });
 
-    // Add or Remove Attribute
-    html.find(".attributes").on("click", ".attribute-control", this._onClickAttributeControl.bind(this));
+    // Add or Remove Crits
+    html.find(".crits").on("click", ".crit-control", this._onClickCritControl.bind(this));
 
     //Select all text in resources as well as rank input boxes
     $("div.resource").find("input").on("click",function(){
@@ -156,6 +174,49 @@ export class ActorSheetFFG extends ActorSheet {
       li.parentElement.removeChild(li);
       await this._onSubmit(event);
     }
+  }
+
+  async _onClickCritControl(event) {
+    event.preventDefault();
+    let a = event.currentTarget;
+    const action = a.dataset.action;
+    
+    // Add new crit
+    if ( action === "create" ) {
+      this._onCritCreate(event)
+    }
+
+    //Edit crit
+    if (action === "edit"){
+      const tr = $(a).parents(".crit");
+      const item = this.actor.getOwnedItem(tr.data("itemId"));
+      item.sheet.render(true);
+    }
+
+    //Delete crit
+    if (action === "delete"){
+      const tr = $(a).parents(".crit");
+      this.actor.deleteOwnedItem(tr.data("itemId"));
+    }
+  }
+
+
+  /**
+   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onCritCreate(event) {
+    event.preventDefault();
+    const header = event.currentTarget;
+    const type = header.dataset.type;
+    const critData = {
+      name: `New ${type.capitalize()}`,
+      type: type,
+      data: duplicate(header.dataset)
+    };
+    delete critData.data["type"];
+    return this.actor.createOwnedItem(critData);
   }
 
   /* -------------------------------------------- */
@@ -246,7 +307,6 @@ export class ActorSheetFFG extends ActorSheet {
 
   _addSkillDicePool(elem) {
     const data = this.getData();
-    console.log(elem);
     const skillName = elem.dataset["ability"];
     const skill = data.data.skills[skillName];
     const characteristic = data.data.characteristics[skill.characteristic];
@@ -258,6 +318,14 @@ export class ActorSheetFFG extends ActorSheet {
 
     const rollButton = elem.querySelector(".roll-button");
     dicePool.renderPreview(rollButton)
+  }
+
+
+  _addDifficultyPool(elem){
+    const dicePool = new DicePoolFFG({
+      difficulty: elem.dataset["difficulty"]
+    });
+    dicePool.renderPreview(elem.children[0])
   }
 }
 

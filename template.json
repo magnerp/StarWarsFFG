@@ -280,8 +280,8 @@
 		},
 		"crit":{
 			"number":1,
-			"name": "testCrit",
-			"description" : "This is a test description",
+			"name": "",
+			"description" : "",
 			"difficulty" : 2
 		}
 	}
