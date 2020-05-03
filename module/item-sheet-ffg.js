@@ -2,13 +2,12 @@
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class SimpleItemSheet extends ItemSheet {
+export class ItemSheetFFG extends ItemSheet {
 
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-			classes: ["worldbuilding", "sheet", "item"],
-			template: "systems/starwarsffg/templates/item-sheet.html",
+			classes: ["swffg", "sheet", "item"],
 			width: 520,
 			height: 480,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
@@ -18,12 +17,16 @@ export class SimpleItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
+  get template() {
+    const path = "systems/starwarsffg/templates/items/";
+    return `${path}/${this.item.data.type}.html`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   getData() {
     const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
-    for ( let attr of Object.values(data.data.attributes) ) {
-      attr.isCheckbox = attr.dtype === "Boolean";
-    }
     return data;
   }
 

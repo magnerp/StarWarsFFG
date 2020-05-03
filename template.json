@@ -241,13 +241,48 @@
 	},
 	"Item": {
 		"types": [
-			"item"
+			"item",
+			"weapon",
+			"armor",
+			"crit"
 		],
+		"templates": {
+			"common": {
+				"description":"",
+				"quantity":1,
+				"weight":0,
+				"rarity":4,
+				"attributes": {}
+			}
+		},
 		"item": {
-			"description": "",
-			"quantity": 1,
-			"weight": 0,
-			"attributes": {}
+			"templates": ["common"]
+		},
+		"weapon":{
+			"templates": ["common"],
+			"damage": 4,
+			"critical":2,
+			"hardPoints":0,
+			"range": "medium",
+			"skill": "Ranged: Light",
+			"condition": "new",
+			"features":"",
+			"qualities":""
+		},
+		"armor":{
+			"templates": ["common"],
+			"soak":2,
+			"defense":0,
+			"hardPoints":0,
+			"condition": "new",
+			"features":"",
+			"qualities":""
+		},
+		"crit":{
+			"number":1,
+			"name": "testCrit",
+			"description" : "This is a test description",
+			"difficulty" : 2
 		}
 	}
 }
