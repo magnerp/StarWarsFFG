@@ -9,28 +9,34 @@
 				"wounds": {
 					"value": 0,
 					"min": 0,
-					"max": 10
+					"max": 10,
+					"name": "Wounds"
 				},
 				"strain": {
 					"value": 0,
 					"min": 0,
-					"max": 10
-				},
-				"soak": {
-					"value": 2
-				},
-				"defence": {
-					"ranged": 0,
-					"melee": 0
+					"max": 10,
+					"name": "Strain"
 				},
 				"encumbrance": {
 					"value": 0,
 					"min":0,
-					"max": 10
+					"max": 10,
+					"name": "Encumbrance"
+				},
+				"soak": {
+					"value": 2,
+					"name": "Soak"
+				},
+				"defence": {
+					"ranged": 0,
+					"melee": 0,
+					"name": "Defence"
 				},
 				"forcePool": {
 					"value": 0,
-					"max": 0
+					"max": 0,
+					"name": "Force Pool"
 				}
 			},
 			"attributes": {},
@@ -64,7 +70,7 @@
 				"Brawl": {
 					"rank": 0,
 					"characteristic": "Brawn", 
-					"career" : true
+					"career" : 0
 				},
 				"Gunnery": {
 					"rank": 0,

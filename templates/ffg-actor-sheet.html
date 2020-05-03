@@ -8,120 +8,54 @@
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
             <div class="cflexrow save-scroll">
-            {{!-- Wounds Box --}}
-            <div class="resource">
-                <div class="split-box">
-                    <h1>Wounds</h1>
-                    <div class="content">
-                        <div class="left">
-                            <input type="text" name="data.stats.wounds.max" value="{{data.stats.wounds.max}}"
-                                data-dtype="Number" />
-                            <label>Threshold</label>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="right">
-                            <input type="text" name="data.stats.wounds.value" value="{{data.stats.wounds.value}}"
-                                data-dtype="Number" />
-                            <label>Current</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Strain Box --}}
-            
-            <div class="resource">
-                <div class="split-box">
-                    <h1>Strain</h1>
-                    <div class="content">
-                        <div class="left">
-                            <input type="text" name="data.stats.strain.max" value="{{data.stats.strain.max}}"
-                                data-dtype="Number" />
-                            <label>Threshold</label>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="right">
-                            <input type="text" name="data.stats.strain.value" value="{{data.stats.strain.value}}"
-                                data-dtype="Number" />
-                            <label>Current</label>
+                {{#each data.stats as |stat id|}}
+                    {{#ifNotEquals id 'soak'}}
+                    <div class="resource">
+                        <div class="split-box">
+                            <h1 class="resourceName">{{stat.name}}</h1>
+                            <div class="content">
+                                <div class="left">
+                                    {{#ifNotEquals id 'defence'}}
+                                    <input type="text" name="data.stats.{{id}}.max" value="{{stat.max}}"
+                                        data-dtype="Number" />
+                                    <label>Threshold</label>
+                                    {{else}}
+                                    <input type="text" name="data.stats.{{id}}.ranged" value="{{stat.ranged}}"
+                                        data-dtype="Number" />
+                                    <label>Ranged</label>
+                                    {{/ifNotEquals}}
+                                </div>
+                                <div class="divider"></div>
+                                <div class="right">
+                                    {{#ifNotEquals id 'defence'}}
+                                    <input type="text" name="data.stats.{{id}}.value" value="{{stat.value}}"
+                                        data-dtype="Number" />
+                                    <label>Current</label>
+                                    {{else}}
+                                    <input type="text" name="data.stats.{{id}}.melee" value="{{stat.melee}}"
+                                        data-dtype="Number" />
+                                    <label>Melee</label>
+                                    {{/ifNotEquals}}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            {{!-- Encumbrance Box --}}
-            <div class="resource">
-                <div class="split-box">
-                    <h1>Encumbrance</h1>
-                    <div class="content">
-                        <div class="left">
-                            <input type="text" name="data.stats.encumbrance.max" value="{{data.stats.encumbrance.max}}"
-                                data-dtype="Number" />
-                            <label>Threshold</label>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="right">
-                            <input type="text" name="data.stats.encumbrance.value" value="{{data.stats.encumbrance.value}}"
-                                data-dtype="Number" />
-                            <label>Current</label>
+                    {{else}}
+                    {{!-- Soak Box --}}
+                    <div class="resource">
+                        <div class="split-box">
+                            <h1>{{stat.name}}</h1>
+                            <div class="content soak">
+                                <div class="center">
+                                    <input type="text" name="data.stats.{{id}}.value" value="{{stat.value}}"
+                                        data-dtype="Number" />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    {{/ifNotEquals}}               
+                {{/each}}
             </div>
-
-            {{!-- Soak Box --}}
-            <div class="resource">
-                <div class="split-box">
-                    <h1>Soak</h1>
-                    <div class="content soak">
-                        <div class="center">
-                            <input type="text" name="data.stats.soak.value" value="{{data.stats.soak.value}}"
-                                data-dtype="Number" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Defense Box --}}
-            <div class="resource">
-                <div class="split-box">
-                    <h1>Defense</h1>
-                    <div class="content">
-                        <div class="left">
-                            <input type="text" name="data.stats.defence.ranged" value="{{data.stats.defence.ranged}}"
-                                data-dtype="Number" />
-                            <label>Ranged</label>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="right">
-                            <input type="text" name="data.stats.defence.melee" value="{{data.stats.defence.melee}}"
-                                data-dtype="Number" />
-                            <label>Melee</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Force Box --}}
-            <div class="resource">
-                <div class="split-box">
-                    <h1>Force</h1>
-                    <div class="content">
-                        <div class="left">
-                            <input type="text" name="data.stats.forcePool.max" value="{{data.stats.forcePool.max}}"
-                                data-dtype="Number" />
-                            <label>Threshold</label>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="right">
-                            <input type="text" name="data.stats.forcePool.value" value="{{data.stats.forcePool.value}}"
-                                data-dtype="Number" />
-                            <label>Commited</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </header>
 
@@ -201,8 +135,8 @@
         {{!-- Owned Items Tab --}}
         <div class="tab items" data-group="primary" data-tab="items">
             <ol class="items-list">
-                <div class="weapon-list" style="background-color: rgb(0, 255, 0);">
-                    <h4>HERE BE WEAPONS</h4>
+                <div class="weapon-list inventory-list">
+                    <h4 class="inventoryHeader">Weapons</h4>
                     {{#each actor.items as |item id|}}
                     {{#ifEquals item.type 'weapon'}}
                     <li class="item flexrow" data-item-id="{{item._id}}">
@@ -218,8 +152,8 @@
                     {{/ifEquals}}
                     {{/each}}
                 </div>
-                <div class="weapon-list" style="background-color: rgb(255, 0, 191);">
-                    <h4>HERE BE ARMOR</h4>
+                <div class="armor-list inventory-list">
+                    <h4 class="inventoryHeader">Armor</h4>
                     {{#each actor.items as |item id|}}
                     {{#ifEquals item.type 'armor'}}
                     <li class="item flexrow" data-item-id="{{item._id}}">
@@ -235,8 +169,8 @@
                     {{/ifEquals}}
                     {{/each}}
                 </div>
-                <div class="weapon-list" style="background-color: rgb(0, 255, 255);">
-                    <h4>HERE BE ITEMS</h4>
+                <div class="item-list inventory-list">
+                    <h4 class="inventoryHeader">Items</h4>
                     {{#each actor.items as |item id|}}
                     {{#ifEquals item.type 'item'}}
                     <li class="item flexrow" data-item-id="{{item._id}}">

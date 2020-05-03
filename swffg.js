@@ -43,6 +43,10 @@ Hooks.once("init", async function() {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
   });
 
+  Handlebars.registerHelper('ifNotEquals', function(arg1, arg2, options) {
+    return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+  });
+
   Handlebars.registerHelper('select', function( value, options ){
     var $el = $('<select />').html( options.fn(this) );
     $el.find('[value="' + value + '"]').attr({'selected':'selected'});

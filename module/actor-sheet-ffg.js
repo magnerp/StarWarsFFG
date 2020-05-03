@@ -183,7 +183,10 @@ export class ActorSheetFFG extends ActorSheet {
     
     // Add new crit
     if ( action === "create" ) {
-      this._onCritCreate(event)
+      this._onCritCreate(event).then(value => {
+        const item = this.actor.getOwnedItem(value._id)
+        item.sheet.render(true)
+      })
     }
 
     //Edit crit
@@ -216,6 +219,7 @@ export class ActorSheetFFG extends ActorSheet {
       data: duplicate(header.dataset)
     };
     delete critData.data["type"];
+    
     return this.actor.createOwnedItem(critData);
   }
 

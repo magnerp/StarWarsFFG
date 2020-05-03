@@ -34,6 +34,7 @@
 }
 
 .swffg.sheet .profile-img {
+    align-self: center;
     flex: 0 0 100px;
     height: 150px;
     margin-right: 10px;
@@ -287,6 +288,21 @@ boxes at the top of the standard FFG character sheets.
     border: 0;
     width: 2em;
     height: 2em;
+}
+
+.inventory-list{
+    margin-bottom: 1em;
+}
+
+.inventoryHeader{
+    background-image: url("../img/textBackground.png"),url("../img/decorationBackground.png");
+    background-position: center top, center 5px;
+    background-repeat: no-repeat, repeat-x;
+    line-height: 40px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: #fff;
 }
 
 input::-webkit-outer-spin-button,
