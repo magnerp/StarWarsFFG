@@ -310,29 +310,70 @@
 
         {{!-- Crits Tab --}}
         <div class="tab crits" data-group="primary" data-tab="crits">
-            <ol class="items-list">
-                <div class="weapon-list" style="background-color: rgb(248, 38, 1);">
-                    <h4>HERE BE CRITS</h4>
-                    {{#each actor.items as |item id|}}
-                    {{#ifEquals item.type 'crit'}}
-                    <li class="item flexrow" data-item-id="{{item._id}}">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
-                        <h4>{{item.data.number}}</h4>
-                        <div class="divider"></div>
-                        <h4>{{item.name}}</h4>
-                        <div class="divider"></div>
-                        <h4>{{item.data.difficulty}}</h4>
-                        <div class="divider"></div>
-                        <h4>{{item.data.description}}</h4>
-                        <div class="item-controls">
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </li>
-                    {{/ifEquals}}
-                    {{/each}}
-                </div>
-            </ol>
+            <div class="crit-list"">
+
+                <table style="table-layout: fixed;">
+                    <thead>
+                        <tr class="characteristicsTable">
+                            <th style="width: 5em">Number</th>
+                            <th style="width: 7.5em;">Name</th>
+                            <th>Difficulty</th>
+                            <th style="width: 50%">Description</th>
+                            <th style="width: 4em">
+                                {{#if owner}}
+                                <div class="crit-controls">
+                                    <a class="crit-control" data-action="create" data-type="crit" title='Add Crit'>
+                                        <i class="fas fa-plus"></i> Add
+                                    </a>
+                                </div>
+                                {{/if}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- {{#each actor.items as |item id|}}
+                            {{#ifEquals item.type 'crit'}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                                <h4>{{item.data.number}}</h4>
+                                <div class="divider"></div>
+                                <h4>{{item.name}}</h4>
+                                <div class="divider"></div>
+                                <h4>{{item.data.difficulty}}</h4>
+                                <div class="divider"></div>
+                                <h4>{{item.data.description}}</h4>
+                                <div class="item-controls">
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </li>
+                            {{/ifEquals}}
+                            {{/each}} -->
+                        {{#each actor.items as |item id|}}
+                        {{#ifEquals item.type 'crit'}}
+                        <tr data-item-id="{{item._id}}" class="crit">
+    
+                            <td class="tdCenter"><div class="slide">{{item.data.number}}</div></td>
+                            <td class="tdCenter"><div class="slide">{{item.name}}</div></td>
+                            <td class="tdCenter critDifficulty" data-difficulty="{{item.data.difficulty}}"><div class="slide"></div></td>       
+                            <td>
+                                <div class="slide" style="max-height: 50px; overflow: auto;">
+
+                                </div>
+                            </td>
+                            <td class="tdCenter">
+                                <div class="crit-controls slide">
+                                    <a class="crit-control crit-edit" data-action="edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="crit-control crit-delete" data-action="delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/ifEquals}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </section>
