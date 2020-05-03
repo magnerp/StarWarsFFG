@@ -5,7 +5,6 @@
   "version": 0.02,
   "minimumCoreVersion": "0.5.5",
   "compatibleCoreVersion": "0.5.5",
-  "templateVersion": 1,
   "author": "Magnerp",
   "esmodules": ["swffg.js","module/dice-pool-ffg.js"],
   "styles": ["styles/simple.css"],
