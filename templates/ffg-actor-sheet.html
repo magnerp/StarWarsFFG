@@ -119,7 +119,7 @@
                         <td class="tdCenter"><input type="checkbox" name="data.skills.{{id}}.career"/></td>   
                         {{/if}}       
                         <td class="tdCenter">
-                            <input name="data.skills.{{id}}.value" value="{{skill.value}}" type="number" min="0" max="5"
+                            <input name="data.skills.{{id}}.rank" value="{{skill.rank}}" type="number" min="0" max="5"
                                 data-dtype="Number" placeholder="0" />
                         </td>
                         <td class="rollTd">
@@ -140,13 +140,54 @@
                     {{#each actor.items as |item id|}}
                     {{#ifEquals item.type 'weapon'}}
                     <li class="item flexrow" data-item-id="{{item._id}}">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
-                        <h4 class="item-name">{{item.name}} PEW PEW</h4>
-                        <input class="item-name" name="actor.items.{{id}}.data.quantity" value="{{item.data.quantity}}"></h4>
-                        <h4 class="item-name">{{item.data.weight}}</h4>
-                        <div class="item-controls">
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        <div class="itemParentDiv">
+                            <div class="item-name alignMiddle" style="width: 6.5em;">
+                                <p>
+                                    {{item.name}}
+                                </p>
+                            </div>
+                            <div class="wflexrow">
+                                <div class="witem">
+                                    <div class="item-stat-box">
+                                        <h4 class="title">Damage</h4>
+                                        <h4 class="value">{{item.data.damage}}</h4>
+                                    </div>
+                                </div>                                     
+                                <div class="witem">
+                                    <div class="item-stat-box">
+                                        <h4 class="title">Critical</h4>
+                                        <h4 class="value">{{item.data.critical}}</h4>
+                                    </div>
+                                </div>                                                          
+                                <div class="witem">
+                                    <div class="item-stat-box">
+                                        <h4 class="title">Range</h4>
+                                        <h4 class="value">{{item.data.range}}</h4>
+                                    </div>
+                                </div>                               
+                                <div class="witem">
+                                    <div class="item-stat-box type">
+                                        <h4 class="title">Type</h4>
+                                        <h4 class="value">{{item.data.skill}}</h4>
+                                    </div>
+                                </div>     
+                                <div class="witem witemPool" data-ability="{{item.data.skill}}">
+                                    <div class="item-stat-box">
+                                        <h4 class="title">Pool</h4>
+                                        <h4 class="roll-button wdice-pool"></h4>
+                                    </div>
+                                </div>
+                                <div class="witem">
+                                    <div class="item-stat-box">
+                                        <h4 class="title">Qualities</h4>
+                                        <h4 class="value">{{item.data.skill}}</h4>
+                                    </div>
+                                </div>                             
+                            </div>
+                            <div class="item-controls alignMiddle">
+                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                            </div>
                         </div>
                     </li>
                     {{/ifEquals}}

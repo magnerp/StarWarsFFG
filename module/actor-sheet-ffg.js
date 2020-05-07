@@ -87,7 +87,7 @@ export class ActorSheetFFG extends ActorSheet {
     // Activate tabs
     let tabs = html.find('.tabs');
     let initial = this._sheetTab;
-    new Tabs(tabs, {
+    new TabsV2(tabs, {
       initial: initial,
       callback: clicked => this._sheetTab = clicked.data("tab")
     });
@@ -113,6 +113,11 @@ export class ActorSheetFFG extends ActorSheet {
     // Setup dice pool image
     html.find(".skill").each((_, elem) => {
       this._addSkillDicePool(elem)
+    });
+
+    // Setup dice pool for weapons
+    html.find(".witemPool").each((_, elem) => {
+      this._addWeaponDicePool(elem)
     });
 
     //Setup difficulty pool for crits
@@ -261,10 +266,10 @@ export class ActorSheetFFG extends ActorSheet {
     const characteristic = data.data.characteristics[skill.characteristic];
 
     const dicePool = new DicePoolFFG({
-      ability: Math.max(characteristic.value, skill.value),
+      ability: Math.max(characteristic.value, skill.rank),
       difficulty: 2 // Default to average difficulty
     });
-    dicePool.upgrade(Math.min(characteristic.value, skill.value));
+    dicePool.upgrade(Math.min(characteristic.value, skill.rank));
 
     if (upgradeType === "ability") {
       dicePool.upgrade();
@@ -316,9 +321,24 @@ export class ActorSheetFFG extends ActorSheet {
     const characteristic = data.data.characteristics[skill.characteristic];
 
     const dicePool = new DicePoolFFG({
-      ability: Math.max(characteristic.value, skill.value),
+      ability: Math.max(characteristic.value, skill.rank),
     });
-    dicePool.upgrade(Math.min(characteristic.value, skill.value));
+    dicePool.upgrade(Math.min(characteristic.value, skill.rank));
+
+    const rollButton = elem.querySelector(".roll-button");
+    dicePool.renderPreview(rollButton)
+  }
+
+  _addWeaponDicePool(elem) {
+    const data = this.getData();
+    const skillName = elem.dataset["ability"];
+    const skill = data.data.skills[skillName];
+    const characteristic = data.data.characteristics[skill.characteristic];
+
+    const dicePool = new DicePoolFFG({
+      ability: Math.max(characteristic.value, skill.rank),
+    });
+    dicePool.upgrade(Math.min(characteristic.value, skill.rank));
 
     const rollButton = elem.querySelector(".roll-button");
     dicePool.renderPreview(rollButton)

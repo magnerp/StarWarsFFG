@@ -52,5 +52,9 @@ Hooks.once("init", async function() {
     $el.find('[value="' + value + '"]').attr({'selected':'selected'});
     return $el.html();
   });
+
+  Handlebars.registerHelper("multiply", function(value, value2) {
+    return value * value2;
+  });
  
 });

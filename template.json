@@ -269,7 +269,7 @@
 			"damage": 4,
 			"critical":2,
 			"hardPoints":0,
-			"range": "medium",
+			"range": "Medium",
 			"skill": "Ranged: Light",
 			"condition": "new",
 			"features":"",
